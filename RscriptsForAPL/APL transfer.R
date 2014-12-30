@@ -23,11 +23,11 @@ ymaj <- c(10^-10,10^-8,10^-6,10^-4)
 
 IdPic <- qplot(Vg ,I_D ,data=DataAll, colour= Device,shape=Device , geom=("point"),size = I(4), main = "", xlab = "Gate Voltage (V)", ylab = "Drain Current (A)")+ theme_set(theme_bw()) + geom_line()
 
-IdPic <- IdPic + theme(axis.title.x = element_text(size=20), axis.title.y = element_text(size=20), plot.title = element_text(size=25),axis.text.x = element_text(size=15),axis.text.y = element_text(size=15),legend.text =element_text(size=15), legend.title=element_text(size=20) )
+IdPic <- IdPic + theme(axis.title.x = element_text(size=20), axis.title.y = element_text(size=20), plot.title = element_text(size=25),axis.text.x = element_text(size=15),axis.text.y = element_text(size=15),legend.text =element_text(size=18), legend.title=element_text(size=0) )
 
 IdPic <- IdPic+ scale_y_log10(breaks= ymaj,labels=c(expression(paste("10"^"-10")),expression(paste("10"^"-8")),expression(paste("10"^"-6")),expression(paste("10"^"-4"))))
 
-IdPic <- IdPic+ theme(legend.justification=c(1,0), legend.position=c(0.5,0.5))
+IdPic <- IdPic+ theme(legend.justification=c(1,0), legend.position=c(0.55,0.45))
 #Draw a blank panel border
 IdPic <-  IdPic+ theme(panel.border = element_rect(size= 1, colour = "black")) 
 #remove the legend background

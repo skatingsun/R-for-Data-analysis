@@ -447,9 +447,9 @@ qplot(SlopeGoBackC,ContactBackC/1000,Rall, geom=("point"),size = I(5), main = "W
 
 
 
-setwd("/Users/sunhuabin/Dropbox/Maniscripts for APL/CR Data") # set the working path
+#setwd("/Users/sunhuabin/Dropbox/Maniscripts for APL/CR Data") # set the working path
 # 
-write.csv(RallM, file = "M-SampleN.csv", row.names = F, quote = F)
+#write.csv(RallM, file = "M-SampleN.csv", row.names = F, quote = F)
 
 
 # All the contact will be give here
@@ -478,6 +478,8 @@ Meanwhile, as a kind of effect from the dielectric, the relationship between gat
 
 ```{r,echo=FALSE}
 # this is a chunk for testing code
+
+library(grid)
 TLMBackAll2 <- rbind(TLMBack4,TLMBack8,TLMBack12,TLMBack16,TLMBack20)
 
 IdPic <- qplot(1/ChannelLength ,Resistance*1000/ChannelLength/1000000 ,data=TLMBackAll2,colour=Vg, shape=Vg,geom=("point"),size = I(4), main = "", xlab = expression(paste("1/L (",mu,"m"^"-1",")")), ylab = expression(paste("R"[tot]," x ","W/L (M",Omega,")")))+ geom_smooth(method="lm", size=1, alpha=0,fullrange=TRUE)+ theme_set(theme_bw()) + scale_x_continuous(limits=c(0.001, 0.02)) 
@@ -489,14 +491,14 @@ IdPic <- IdPic+ theme(legend.justification=c(1,0), legend.position=c(0.3,0.5))
 IdPic <-  IdPic+ theme(panel.border = element_rect(size= 1, colour = "black")) 
 #remove the legend background
 IdPic <- IdPic+theme(legend.key=element_rect(colour="white",size=0.5,linetype="dashed"))
-#remove grid lines
-IdPic <- IdPic + theme(panel.background=element_rect(fill='transparent', color='grey'),panel.grid=element_blank())
+#remove grid lines and make the ticks inside
+IdPic <- IdPic + theme(panel.background=element_rect(fill='transparent', color='grey'),panel.grid=element_blank()) + theme(axis.ticks.length=unit(-0.25, "cm"), axis.ticks.margin=unit(0.5, "cm"))
 IdPic
 
 ymaj <- c(0.2,0.4,0.6)
 xmaj <- c(5,10,15)
 
-Fitplot <- qplot(VTLM ,abs(ContactBackC)/1000000 ,colour = "red",Rall,geom=("point"),size = I(5), main = "", xlab = expression(paste("-(V"[g]," - ","V"[th],") (V)")), ylab = expression(paste("R"[c]," x ","W (M",Omega," cm)")))+ theme_set(theme_bw())+ theme(axis.title.x=element_text(size=24), axis.title.y=element_text(size=24), plot.title=element_text(size=30), axis.text.x=element_text(size=24), axis.text.y=element_text(size=24), legend.text=element_text(size=24), legend.title=element_text(size=0)) + theme(legend.justification=c(0,0), legend.position=c(1,0.7)) + theme(panel.border = element_rect(size= 1, colour = "black")) + theme(panel.grid.major = element_line(size= NA, colour = NA))+ theme(panel.background=element_rect(fill='transparent', color='grey'),panel.grid=element_blank()) +scale_y_log10(breaks= ymaj,labels=ymaj) +scale_x_log10(breaks= xmaj,labels=xmaj)
+Fitplot <- qplot(VTLM ,abs(ContactBackC)/1000000 ,colour = "red",Rall,geom=("point"),size = I(5), main = "", xlab = expression(paste("-(V"[g]," - ","V"[th],") (V)")), ylab = expression(paste("R"[c]," x ","W (M",Omega," cm)")))+ theme_set(theme_bw())+ theme(axis.title.x=element_text(size=24), axis.title.y=element_text(size=24), plot.title=element_text(size=30), axis.text.x=element_text(size=24), axis.text.y=element_text(size=24), legend.text=element_text(size=24), legend.title=element_text(size=0)) + theme(legend.justification=c(0,0), legend.position=c(1,0.7)) + theme(panel.border = element_rect(size= 1, colour = "black")) + theme(panel.grid.major = element_line(size= NA, colour = NA))+ theme(panel.background=element_rect(fill='transparent', color='grey'),panel.grid=element_blank()) +scale_y_log10(breaks= ymaj,labels=ymaj) +scale_x_log10(breaks= xmaj,labels=xmaj) + theme(axis.ticks.length=unit(-0.25, "cm"), axis.ticks.margin=unit(0.5, "cm"))
 Fitplot
 
 
